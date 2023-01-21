@@ -109,12 +109,12 @@ function creationStation() {
     {
      type: 'input',
      name: 'engineerName',
-     message: "Please provide the engineer's name:"
+     message: "Please provide the engineer's name:",
      validate: (answer) => {
       if (answer !== '') {
        return true;
       }
-      return 'Please enter a minimum of one character to continue...';
+      return 'Please enter a minimum of one character to continue.';
      },
     },
     {
