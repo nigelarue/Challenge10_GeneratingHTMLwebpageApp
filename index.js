@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
-const Intern = require('./lib/intern');
-const Engineer = require('./lib/engineer');
-const Manager = require('./lib/manager');
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
 
 const render = require('./src/template.js');
 
