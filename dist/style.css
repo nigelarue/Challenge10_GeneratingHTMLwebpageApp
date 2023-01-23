@@ -1,12 +1,13 @@
 .title-header {
- background-color: #e84855;
- color: #ffffff;
+ background-color: coral;
+ color: rgb(166, 255, 0);
 }
 
 .teamcard-grid {
  max-width: 1000px;
  margin: 3em auto;
  flex-wrap: wrap;
+ display: flex;
 }
 
 .teamcard-card {
@@ -14,14 +15,20 @@
  max-width: 280px;
  width: 90%;
  min-height: 22rem;
- background-color: #007bff;
  color: white;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
- box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+ box-shadow: 4px 4px 8px rgb(255, 132, 0);
  border: none;
 }
+
+.teamcard-header {
+ background-color: coral;
+ padding: 15px;
+ color: rgb(166, 255, 0);
+}
+
 
 .teamcard-body {
  display: flex;
@@ -31,7 +38,7 @@
 }
 
 .list-group-item {
- color: #000000;
+ color: #e3543d;
  text-decoration: none;
 }
 

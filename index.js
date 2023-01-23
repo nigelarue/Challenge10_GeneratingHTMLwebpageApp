@@ -1,9 +1,11 @@
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
-const fs = require('fs');
-const path = require('path');
 const inquirer = require('inquirer');
+const path = require('path');
+const fs = require('fs');
+
+
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const distPath = path.join(DIST_DIR, 'team.html');
@@ -85,22 +87,22 @@ function creationStation() {
     inquirer
       .prompt([
         {
-        type: 'list',
-        name: 'teamRoleOptions',
-        message: 'Please provide the role of the team member:',
-        choices: [
-          'Engineer',
-          'Intern',
-          "Not applicable",
-        ],
-        },
+          type: "list",
+          name: "teamRoleOptions",
+          message: "Please provide the role of the team member:",
+          choices: [
+            {name: "Engineer", value: "Engineer"},
+            {name:"Intern", value: "Intern"},
+            {name:"Not applicable"}
+          ],
+        }
       ])
       .then((userChoice) => {
-          switch (userChoice.TeamRoleOptions) {
-          case 'Engineer':
+          switch (userChoice.teamRoleOptions) {
+          case "Engineer":
               addEngineer();
               break;
-          case 'Intern':
+          case "Intern":
               addIntern();
               break;
             default:
@@ -111,69 +113,69 @@ function creationStation() {
 
   function addEngineer() {
     inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'engineerName',
-        message: "Please provide the engineer's name:",
-        validate: (answer) => {
-          if (answer !== '') {
-          return true;
-          }
-          return 'Please enter a minimum of one character to continue.';
-        },
-      },
-      {
-        type: 'input',
-        name: 'engineerId',
-        message: "Please provide engineer ID number (must have at least one numerical value):",
-        validate: (answer) => {
-          const pass = answer.match(/^[1-9]\d*$/);
-          if (pass) {
-          if (idArray.includes(answer)) {
-            return 'The provided ID is already taken. Please provide a different ID number.';
-          } else {
+      .prompt([
+        {
+          type: 'input',
+          name: 'engineerName',
+          message: "Please provide the engineer's name:",
+          validate: (answer) => {
+            if (answer !== '') {
             return true;
-          }
-          }
-          return 'An acceptable engineer ID number must have at least one numberical value greater than zero.';
+            }
+            return 'Please enter a minimum of one character to continue.';
+          },
         },
-      },
-      {
-        type: 'input',
-        name: 'engineerEmail',
-        message: "Please provide engineer email address:",
-        validate: (answer) => {
-          const pass = answer.match(/\S+@\S+\.\S+/);
-          if (pass) {
-          return true;
-          }
-          return 'Please provide a valid email address.';
+        {
+          type: 'input',
+          name: 'engineerId',
+          message: "Please provide engineer ID number (must have at least one numerical value):",
+          validate: (answer) => {
+            const pass = answer.match(/^[1-9]\d*$/);
+            if (pass) {
+            if (idArray.includes(answer)) {
+              return 'The provided ID is already taken. Please provide a different ID number.';
+            } else {
+              return true;
+            }
+            }
+            return 'An acceptable engineer ID number must have at least one numberical value greater than zero.';
+          },
         },
-      },
-      {
-        type: 'input',
-        name: 'engineerGithub',
-        message: "Please provide engineer's GitHub username:",
-        validate: (answer) => {
-          if (answer !== '') {
-          return true;
-          }
-          return 'Please enter a minimum of one character to continue...';
+        {
+          type: 'input',
+          name: 'engineerEmail',
+          message: "Please provide engineer email address:",
+          validate: (answer) => {
+            const pass = answer.match(/\S+@\S+\.\S+/);
+            if (pass) {
+            return true;
+            }
+            return 'Please provide a valid email address.';
+          },
         },
-      },
-    ])
-    .then((answers) => {
-      const engineer = new Engineer(
-        answers.engineerName,
-        answers.engineerId,
-        answers.engineerEmail,
-        answers.engineerGithub
-      );
-      teamMates.push(engineer);
-      idArray.push(answers.engineerId);
-      createTeam();
-    });
+        {
+          type: 'input',
+          name: 'engineerGithub',
+          message: "Please provide engineer's GitHub username:",
+          validate: (answer) => {
+            if (answer !== '') {
+            return true;
+            }
+            return 'Please enter a minimum of one character to continue...';
+          },
+        },
+      ])
+      .then((answers) => {
+        const engineer = new Engineer(
+          answers.engineerName,
+          answers.engineerId,
+          answers.engineerEmail,
+          answers.engineerGithub
+        );
+        teamMates.push(engineer);
+        idArray.push(answers.engineerId);
+        createTeam();
+      });
   }
   
   function addIntern() {
@@ -230,17 +232,17 @@ function creationStation() {
           },
         },
       ])
-    .then((answers) => {
-    const intern = new Intern(
-      answers.internName,
-      answers.internId,
-      answers.internEmail,
-      answers.internSchool
-    );
-    teamMates.push(intern);
-    idArray.push(answers.internId);
-    createTeam();
-    });
+      .then((answers) => {
+      const intern = new Intern(
+        answers.internName,
+        answers.internId,
+        answers.internEmail,
+        answers.internSchool
+      );
+      teamMates.push(intern);
+      idArray.push(answers.internId);
+      createTeam();
+      });
   }
 
   function buildTeam() {
